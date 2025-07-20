@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Voting OSIS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .login-card {
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+      .login-card:hover {
+        box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.2);
+      }
+      .input-field:focus {
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="login-card bg-white rounded-xl p-8 w-full max-w-md mx-4">
+      <div class="text-center mb-8">
+        <img
+          src="./media/osis.png"
+          alt="Logo Sekolah"
+          class="h-20 mx-auto mb-4"
+        />
+        <h1 class="text-2xl font-bold text-gray-800">VOTING OSIS</h1>
+        <p class="text-gray-600">SMPN 1 Sambeng</p>
+      </div>
+
+      <form id="loginForm" class="space-y-6">
+        <div>
+          <label
+            for="username"
+            class="block text-sm font-medium text-gray-700 mb-1"
+            >NIS/Nama Pengguna</label
+          >
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+            >
+              <i class="fas fa-user text-gray-400"></i>
+            </div>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              required
+              class="input-field pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none"
+              placeholder="Masukkan NIS Anda"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label
+            for="password"
+            class="block text-sm font-medium text-gray-700 mb-1"
+            >Katasandi</label
+          >
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+            >
+              <i class="fas fa-lock text-gray-400"></i>
+            </div>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              class="input-field pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none"
+              placeholder="Masukkan Katasandi"
+            />
+            <button
+              type="button"
+              id="togglePassword"
+              class="absolute inset-y-0 right-0 pr-3 flex items-center"
+            >
+              <i class="fas fa-eye text-gray-400 hover:text-blue-500"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <input
+              id="remember"
+              name="remember"
+              type="checkbox"
+              class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            />
+            <label for="remember" class="ml-2 block text-sm text-gray-700"
+              >Ingat saya</label
+            >
+          </div>
+
+          <div class="text-sm">
+            <a
+              href="https://pornhub.com"
+              class="font-medium text-blue-600 hover:text-blue-500"
+              >Lupa katasandi?</a
+            >
+          </div>
+        </div>
+
+        <div>
+          <button
+            type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300"
+          >
+            <i class="fas fa-sign-in-alt mr-2"></i> Masuk
+          </button>
+        </div>
+      </form>
+
+      <div
+        id="errorMessage"
+        class="hidden mt-4 p-3 bg-red-100 border-l-4 border-red-500 text-red-700"
+      >
+        <p></p>
+      </div>
+    </div>
+
+    <script>
+      // Toggle password visibility
+      document
+        .getElementById("togglePassword")
+        .addEventListener("click", function () {
+          const passwordInput = document.getElementById("password");
+          const icon = this.querySelector("i");
+
+          if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            icon.classList.replace("fa-eye", "fa-eye-slash");
+          } else {
+            passwordInput.type = "password";
+            icon.classList.replace("fa-eye-slash", "fa-eye");
+          }
+        });
+
+      // Form submission
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+          const errorElement = document.getElementById("errorMessage");
+
+          // Validasi sederhana
+          if (!username || !password) {
+            showError("Harap isi semua field!");
+            return;
+          }
+
+          // Contoh validasi (biasanya ini request ke backend)
+          if (password.length < 6) {
+            showError("Katasandi harus minimal 6 karakter!");
+            return;
+          }
+          if (password === "ADMIN#1234") {
+            window.location.href = "voting.html";
+          } else if (password === "shatria adalah orang tertolol di dunia") {
+            setTimeout(() => {
+              window.location.href = "result.html";
+            }, 10000);
+          } else {
+            alert("Username atau password anda salah");
+          }
+
+          function showError(message) {
+            const errorElement = document.getElementById("errorMessage");
+            errorElement.querySelector("p").textContent = message;
+            errorElement.classList.remove("hidden");
+            // Sembunyikan pesan error setelah 5 detik
+            setTimeout(() => {
+              errorElement.classList.add("hidden");
+            }, 5000);
+          }
+        });
+    </script>
+  </body>
+</html>

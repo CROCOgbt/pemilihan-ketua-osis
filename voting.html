@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voting OSIS SMPN 1 Sambeng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="./index.js" type="module" defer></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: "#f0f9ff",
+                100: "#e0f2fe",
+                200: "#bae6fd",
+                300: "#7dd3fc",
+                400: "#38bdf8",
+                500: "#0ea5e9",
+                600: "#0284c7",
+                700: "#0369a1",
+                800: "#075985",
+                900: "#0c4a6e",
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+        .card-hover {
+          transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+            0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gradient-to-br from-primary-50 to-primary-100 min-h-screen">
+    <!-- Header Section -->
+    <header class="bg-white shadow-md">
+      <div class="container mx-auto px-4 py-6">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+          <div class="flex items-center mb-4 md:mb-0">
+            <img src="./media/osis.png" alt="Logo Sekolah" class="h-16 mr-4" />
+            <div>
+              <h1 class="text-2xl font-bold text-primary-800">
+                SMPN 1 SAMBENG
+              </h1>
+              <p class="text-primary-600">Voting Ketua OSIS 2024</p>
+            </div>
+          </div>
+          <img src="./media/snessa.jpg" alt="Logo OSIS" class="h-20 mr-4 hidden
+          md:block"" />
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-12 px-4">
+      <div class="container mx-auto text-center">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
+            PEMILIHAN KETUA OSIS
+          </h2>
+          <p class="text-lg text-primary-700 mb-8">
+            "Bersama membangun sekolah yang lebih baik melalui pemimpin yang
+            berkualitas"
+          </p>
+          <div
+            class="bg-white rounded-lg shadow-lg p-6 inline-block animate-float"
+          >
+            <i class="fas fa-vote-yea text-5xl text-primary-500"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Candidates Section -->
+    <section class="py-12 px-4 bg-white">
+      <div class="container mx-auto">
+        <h2 class="text-3xl font-bold text-center text-primary-800 mb-12">
+          KANDIDAT KETUA OSIS
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Candidate 1 -->
+          <div
+            class="bg-primary-50 rounded-xl overflow-hidden shadow-lg card-hover"
+          >
+            <div class="relative">
+              <img
+                src="./media/kandidat.jpg"
+                alt="Kandidat 1"
+                class="w-full h-64 object-cover"
+              />
+              <div
+                class="absolute top-4 right-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-semibold"
+              >
+                Kandidat 1
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-primary-800 mb-2">
+                Nama Kandidat 1
+              </h3>
+              <div class="mb-4">
+                <h4 class="font-semibold text-primary-700 mb-1">Visi:</h4>
+                <p class="text-primary-600">
+                  Mewujudkan sekolah yang aktif, kreatif, dan berprestasi
+                </p>
+              </div>
+              <div class="mb-4">
+                <h4 class="font-semibold text-primary-700 mb-1">Misi:</h4>
+                <ul class="list-disc list-inside text-primary-600 text-sm">
+                  <li>Meningkatkan kegiatan ekstrakurikuler</li>
+                  <li>Memperkuat karakter siswa</li>
+                  <li>Membangun lingkungan sekolah yang nyaman</li>
+                </ul>
+              </div>
+              <button
+                onclick="vote('A')"
+                class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300"
+              >
+                <i class="fas fa-check-circle mr-2"></i> Pilih Kandidat Ini
+              </button>
+            </div>
+          </div>
+
+          <!-- Candidate 2 -->
+          <div
+            class="bg-primary-50 rounded-xl overflow-hidden shadow-lg card-hover"
+          >
+            <div class="relative">
+              <img
+                src="./media/kandidat.jpg"
+                alt="Kandidat 2"
+                class="w-full h-64 object-cover"
+              />
+              <div
+                class="absolute top-4 right-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-semibold"
+              >
+                Kandidat 2
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-primary-800 mb-2">
+                Nama Kandidat 2
+              </h3>
+              <div class="mb-4">
+                <h4 class="font-semibold text-primary-700 mb-1">Visi:</h4>
+                <p class="text-primary-600">
+                  Menjadikan OSIS sebagai wadah pengembangan potensi siswa
+                </p>
+              </div>
+              <div class="mb-4">
+                <h4 class="font-semibold text-primary-700 mb-1">Misi:</h4>
+                <ul class="list-disc list-inside text-primary-600 text-sm">
+                  <li>Mengoptimalkan program OSIS</li>
+                  <li>Meningkatkan solidaritas antar siswa</li>
+                  <li>Menjadi jembatan antara siswa dan sekolah</li>
+                </ul>
+              </div>
+              <button
+                onclick="vote('B')"
+                class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300"
+              >
+                <i class="fas fa-check-circle mr-2"></i> Pilih Kandidat Ini
+              </button>
+            </div>
+          </div>
+
+          <!-- Candidate 3 -->
+          <div
+            class="bg-primary-50 rounded-xl overflow-hidden shadow-lg card-hover"
+          >
+            <div class="relative">
+              <img
+                src="./media/kandidat.jpg"
+                alt="Kandidat 3"
+                class="w-full h-64 object-cover"
+              />
+              <div
+                class="absolute top-4 right-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-semibold"
+              >
+                Kandidat 3
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-primary-800 mb-2">
+                Nama Kandidat 3
+              </h3>
+              <div class="mb-4">
+                <h4 class="font-semibold text-primary-700 mb-1">Visi:</h4>
+                <p class="text-primary-600">
+                  Sekolah unggul dengan siswa yang berkarakter dan berprestasi
+                </p>
+              </div>
+              <div class="mb-4">
+                <h4 class="font-semibold text-primary-700 mb-1">Misi:</h4>
+                <ul class="list-disc list-inside text-primary-600 text-sm">
+                  <li>Mengadakan kegiatan akademik dan non-akademik</li>
+                  <li>Memperkuat disiplin siswa</li>
+                  <li>Meningkatkan kebersihan lingkungan sekolah</li>
+                </ul>
+              </div>
+              <button
+                onclick="vote('C')"
+                class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300"
+              >
+                <i class="fas fa-check-circle mr-2"></i> Pilih Kandidat Ini
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center block md:hidden">
+        <button
+          onclick="window.location.href='result.html'"
+          class="text-blue-600 hover:underline bg-transparent p-0 border-none"
+        >
+          Klik Di Sini
+        </button>
+      </div>
+    </section>
+
+    <!-- Voting Info Section -->
+    <section class="py-12 px-4 bg-primary-800 text-white">
+      <div class="container mx-auto">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-3xl font-bold mb-6">TATA CARA PEMILIHAN</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-primary-700 p-6 rounded-lg">
+              <div class="text-4xl mb-4 text-primary-300">1</div>
+              <h3 class="text-xl font-semibold mb-2">Pilih Kandidat</h3>
+              <p>
+                Klik tombol "Pilih Kandidat Ini" pada kandidat yang Anda dukung
+              </p>
+            </div>
+            <div class="bg-primary-700 p-6 rounded-lg">
+              <div class="text-4xl mb-4 text-primary-300">2</div>
+              <h3 class="text-xl font-semibold mb-2">Konfirmasi</h3>
+              <p>Anda akan diminta untuk mengkonfirmasi pilihan Anda</p>
+            </div>
+            <div class="bg-primary-700 p-6 rounded-lg">
+              <div class="text-4xl mb-4 text-primary-300">3</div>
+              <h3 class="text-xl font-semibold mb-2">Selesai</h3>
+              <p>Pilihan Anda akan tercatat dan tidak dapat diubah</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary-900 text-white py-8 px-4">
+      <div class="container mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-4 md:mb-0">
+            <h3 class="text-xl font-bold">Pemilih Ketua OSIS SMPN 1 Sambeng</h3>
+            <p class="text-primary-300">Tahun Ajaran 2025/2026</p>
+          </div>
+          <div class="flex space-x-4">
+            <a
+              href="#"
+              class="text-white hover:text-primary-300 transition duration-300"
+            >
+              <i class="fab fa-instagram text-2xl"></i>
+            </a>
+            <a
+              href="#"
+              class="text-white hover:text-primary-300 transition duration-300"
+            >
+              <i class="fab fa-facebook text-2xl"></i>
+            </a>
+            <a
+              href="#"
+              class="text-white hover:text-primary-300 transition duration-300"
+            >
+              <i class="fab fa-twitter text-2xl"></i>
+            </a>
+          </div>
+        </div>
+        <div
+          class="border-t border-primary-700 mt-6 pt-6 text-center text-primary-300"
+        >
+          <p>
+            © 2025 Panitia Pemilihan OSIS SMPN 1 Sambeng. Semua hak dilindungi.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Voting Modal -->
+    <div
+      id="voteModal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50"
+    >
+      <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+        <h3 class="text-xl font-bold text-primary-800 mb-4">
+          Konfirmasi Pilihan
+        </h3>
+        <p class="mb-6">
+          Anda yakin memilih
+          <span id="candidateName" class="font-semibold">Kandidat</span>
+          sebagai Ketua OSIS?
+        </p>
+        <div class="flex justify-end space-x-4">
+          <button
+            onclick="closeModal()"
+            class="px-4 py-2 border border-primary-600 text-primary-600 rounded-lg hover:bg-primary-50 transition duration-300"
+          >
+            Batal
+          </button>
+          <button
+            onclick="confirmVote()"
+            class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition duration-300"
+          >
+            Ya, Saya Yakin
+          </button>
+          <audio id="notif" src="./media/notif.mp3"></audio>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div
+      id="successModal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50"
+    >
+      <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4 text-center">
+        <div class="text-green-500 text-6xl mb-4">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h3 class="text-xl font-bold text-primary-800 mb-2">
+          Voting Berhasil!
+        </h3>
+        <p class="mb-6">Terima kasih telah menggunakan hak pilih Anda.</p>
+      </div>
+    </div>
+  </body>
+</html>

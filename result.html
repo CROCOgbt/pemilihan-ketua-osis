@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hasil Voting OSIS SMPN 1 Sambeng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .tier-card {
+        transition: all 0.3s ease;
+      }
+      .tier-card:hover {
+        transform: scale(1.03);
+      }
+      .progress-bar {
+        transition: width 2s ease-in-out;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-blue-800 text-white shadow-lg">
+      <div class="container mx-auto px-4 py-6">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+          <div class="flex items-center mb-4 md:mb-0">
+            <div>
+              <h1 class="text-2xl font-bold">HASIL VOTING KETOS</h1>
+              <p class="text-blue-200">SMPN 1 Sambeng - Tahun 2024</p>
+          </div>
+          
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+      <!-- Summary Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div class="bg-white rounded-xl shadow-md p-6 text-center">
+          <h3 class="text-gray-500 font-semibold">Total Pemilih</h3>
+          <p id="totalSuara" class="text-4xl font-bold text-blue-600 mt-2"></p>
+          <p id="totalPemilih" class="text-gray-400 text-sm mt-2"></p>
+        </div>
+        <div class="bg-white rounded-xl shadow-md p-6 text-center">
+          <h3 class="text-gray-500 font-semibold">Pemimpin Saat Ini</h3>
+          <p id="pemenang" class="text-4xl font-bold text-blue-600 mt-2"></p>
+          <p id="pemenangSuara" class="text-gray-400 text-sm mt-2"></p>
+        </div> 
+        <div class="bg-white rounded-xl shadow-md p-6 text-center">
+          <h3 class="text-gray-500 font-semibold">Waktu Tersisa</h3>
+          <p id="jam" class="text-4xl font-bold text-blue-600 mt-2">00:00:00</p>
+          <p class="text-gray-400 text-sm mt-2">Berakhir pada 18:00 WIB</p>
+        </div>
+      </div>
+
+      <!-- Bar Chart -->
+      <div class="bg-white rounded-xl shadow-md p-6 mb-12">
+        <h2 class="text-xl font-bold text-gray-800 mb-6">Perolehan Suara</h2>
+        <div class="h-80">
+          <canvas id="voteChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Tier List -->
+      <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+        <h2 class="text-xl font-bold text-gray-800 mb-6">Klasemen Kandidat</h2>
+
+        <!-- Tier 1 -->
+        <div
+        class="tier-card bg-gradient-to-r from-gray-50 to-gray-100 border-l-4 border-gray-400 rounded-lg p-4 mb-4"
+      >
+        <div class="flex items-center">
+          <div
+            class="bg-gray-400 text-white font-bold rounded-full w-10 h-10 flex items-center justify-center mr-4"
+          >
+            2
+          </div>
+          <div class="flex-grow">
+            <div class="flex justify-between items-center">
+              <h3 class="font-bold text-lg">Kandidat 1</h3>
+              <span id="progress1"
+                class="bg-gray-400 text-white px-3 py-1 rounded-full text-sm font-semibold"
+              >
+                
+              </span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+              <div
+                class="bg-gray-400 h-2.5 rounded-full progress-bar" id="garis1"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+       
+
+        <!-- Tier 2 -->
+ <div
+          class="tier-card bg-gradient-to-r from-yellow-50 to-yellow-100 border-l-4 border-yellow-400 rounded-lg p-4 mb-4"
+        >
+          <div class="flex items-center">
+            <div
+              class="bg-yellow-400 text-white font-bold rounded-full w-10 h-10 flex items-center justify-center mr-4"
+            >
+              1
+            </div>
+            <div class="flex-grow">
+              <div class="flex justify-between items-center">
+                <h3 class="font-bold text-lg">Kandidat 2</h3>
+                <span
+                 id="progress2" class="bg-yellow-400 text-white px-3 py-1 rounded-full text-sm font-semibold"
+                >
+                  
+                </span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+                <div
+                  class="bg-yellow-400 h-2.5 rounded-full progress-bar"
+                   id="garis2"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Tier 3 -->
+        <div
+          class="tier-card bg-gradient-to-r from-amber-50 to-amber-100 border-l-4 border-amber-600 rounded-lg p-4"
+        >
+          <div class="flex items-center">
+            <div
+              class="bg-amber-600 text-white font-bold rounded-full w-10 h-10 flex items-center justify-center mr-4"
+            >
+              3
+            </div>
+            <div class="flex-grow">
+              <div class="flex justify-between items-center">
+                <h3 class="font-bold text-lg">Kandidat 3</h3>
+                <span id="progress3"
+                  class="bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-semibold"
+                >
+                  
+                </span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+                <div
+                  class="bg-amber-600 h-2.5 rounded-full progress-bar"
+                   id="garis3"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Candidate Details -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Kandidat 1 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+          <div class="bg-yellow-400 p-4 text-center text-white font-bold">
+            JUARA 1
+          </div>
+          <div class="p-6">
+            <div class="flex justify-center mb-4">
+              <img
+                src="./media/kandidat.jpg"
+                alt="Kandidat 2"
+                class="w-32 h-32 rounded-full object-cover border-4 border-yellow-400"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-center mb-2">Nama Kandidat 2</h3>
+            <p id="profile1" class="text-gray-500 text-center mb-4"></p>
+            <div class="bg-yellow-50 p-4 rounded-lg">
+              <h4 class="font-semibold text-yellow-800 mb-2">Visi:</h4>
+              <p class="text-sm">
+                Menjadikan OSIS sebagai wadah pengembangan potensi siswa
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kandidat 2 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+          <div class="bg-gray-400 p-4 text-center text-white font-bold">
+            JUARA 2
+          </div>
+          <div class="p-6">
+            <div class="flex justify-center mb-4">
+              <img
+                src="./media/kandidat.jpg"
+                alt="Kandidat 1"
+                class="w-32 h-32 rounded-full object-cover border-4 border-gray-400"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-center mb-2">Nama Kandidat 1</h3>
+            <p id="profile2" class="text-gray-500 text-center mb-4"></p>
+            <div class="bg-gray-50 p-4 rounded-lg">
+              <h4 class="font-semibold text-gray-800 mb-2">Visi:</h4>
+              <p class="text-sm">
+                Mewujudkan sekolah yang aktif, kreatif, dan berprestasi
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kandidat 3 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+          <div class="bg-amber-600 p-4 text-center text-white font-bold">
+            JUARA 3
+          </div>
+          <div class="p-6">
+            <div class="flex justify-center mb-4">
+              <img
+                src="./media/kandidat.jpg"
+                alt="Kandidat 3"
+                class="w-32 h-32 rounded-full object-cover border-4 border-amber-600"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-center mb-2">Nama Kandidat 3</h3>
+            <p id="profile3" class="text-gray-500 text-center mb-4"></p>
+            <div class="bg-amber-50 p-4 rounded-lg">
+              <h4 class="font-semibold text-amber-800 mb-2">Visi:</h4>
+              <p class="text-sm">
+                Sekolah unggul dengan siswa yang berkarakter dan berprestasi
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+      <div class="container mx-auto px-4">
+        <div class="text-center">
+          <p>© 2025 Panitia Pemilihan OSIS SMPN 1 Sambeng</p>
+          <p class="text-gray-400 text-sm mt-2">
+            Hasil voting akan diumumkan secara resmi setelah proses pemilihan
+            selesai
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="./result.js" type="module"></script>
+    
+  </body>
+</html>
