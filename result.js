@@ -49,7 +49,7 @@ onValue(resultRef, (snapshot) => {
     voteChart = new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["Kandidat A", "Kandidat B", "Kandidat C"],
+        labels: ["Kandidat 1", "Kandidat 2", "Kandidat 3"],
         datasets: [
           {
             label: "Jumlah Suara",
